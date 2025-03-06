@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สั่งซื้อกาแฟ</title>
+  <style>
+    /* การตั้งค่าพื้นหลัง */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://example.com/coffee-background.jpg'); /* ใส่ URL ของภาพพื้นหลัง */
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* กล่องสำหรับเนื้อหาหลัก */
+    .order-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    /* ปุ่มสั่งซื้อ */
+    #orderButton {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 18px;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #orderButton:hover {
+      background-color: #45a049;
+      transform: translateY(-3px);
+    }
+
+    /* ฟอร์มสั่งซื้อ */
+    .order-form {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .order-form input[type="number"] {
+      width: 60px;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    .order-form button {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .order-form button:hover {
+      background-color: #45a049;
+    }
+
+    /* ข้อความยืนยันการสั่งซื้อ */
+    .confirmation-message {
+      display: none;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    /* ปุ่มกลับไปหน้าหลัก */
+    #backToHomeButton {
+      background-color: #f44336;
+      color: white;
+      font-size: 18px;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
+    }
+
+    #backToHomeButton:hover {
+      background-color: #e53935;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="order-container">
+    <h1>Hot Cappuccino</h1>
+    <img src="img/menu-item-1.jpg" alt="Image" class="rounded-md">
+    <h2>กรอกจำนวน</h2>
+    <p>กาแฟที่คุณชื่นชอบพร้อมเสิร์ฟให้ถึงมือคุณ!</p>
+    
+    <!-- ปุ่มสั่งซื้อ -->
+    <button id="orderButton">สั่งซื้อกาแฟ</button>
+
+    <!-- ฟอร์มสั่งซื้อ -->
+    <div id="orderForm" class="order-form">
+      <label for="quantity">จำนวนกาแฟ:</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+      <button id="confirmOrderButton">ยืนยันการสั่งซื้อ</button>
+    </div>
+
+    <!-- ข้อความยืนยันการสั่งซื้อ -->
+    <div id="confirmationMessage" class="confirmation-message">
+      <p>สั่งซื้อกาแฟจำนวน <span id="coffeeQuantity"></span> ถ้วยเรียบร้อยแล้ว!</p>
+    </div>
+
+    <!-- ปุ่มกลับไปหน้าหลัก -->
+    <button id="backToHomeButton" onclick="window.location.href='index.html'">กลับไปหน้าหลัก</button> <!-- เปลี่ยน URL ตามที่ต้องการ -->
+  </div>
+
+  <script>
+    const orderButton = document.getElementById('orderButton');
+    const orderForm = document.getElementById('orderForm');
+    const confirmOrderButton = document.getElementById('confirmOrderButton');
+    const confirmationMessage = document.getElementById('confirmationMessage');
+    const coffeeQuantity = document.getElementById('coffeeQuantity');
+
+    // เมื่อคลิกปุ่ม "สั่งซื้อกาแฟ"
+    orderButton.onclick = function() {
+      orderForm.style.display = 'block'; // แสดงฟอร์มระบุจำนวนกาแฟ
+    };
+
+    // เมื่อคลิกปุ่ม "ยืนยันการสั่งซื้อ"
+    confirmOrderButton.onclick = function() {
+      const quantity = document.getElementById('quantity').value; // จำนวนกาแฟที่สั่ง
+      coffeeQuantity.textContent = quantity; // แสดงจำนวนกาแฟที่สั่ง
+
+      // ซ่อนฟอร์มและแสดงข้อความยืนยัน
+      orderForm.style.display = 'none';
+      confirmationMessage.style.display = 'block';
+    };
+  </script>
+
+</body>
+</html>
