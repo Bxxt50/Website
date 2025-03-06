@@ -1,0 +1,40 @@
+/* สไตล์ของ pop-up */
+.popup {
+    position: fixed;
+    z-index: 1; /* อยู่เหนือเนื้อหาทั้งหมด */
+    top: 0;
+    left: 0;
+    display: none; /* ซ่อน pop-up ตามค่าเริ่มต้น */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* พื้นหลังเป็นสีดำครึ่งทึบ */
+  }
+  
+  .popup-content {
+    width: 300px;
+    padding: 20px;
+    margin: 15% auto;
+    border: 1px solid #888;
+    background-color: white;
+    text-align: center;
+  }
+  
+  .close-btn {
+    float: right;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  button {
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
